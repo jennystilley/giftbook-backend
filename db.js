@@ -23,11 +23,38 @@ export default {
     const res = await pool.query('SELECT * FROM recipients WHERE customer_id = $1', [customer_id])
     return res.rows
   },
-  async addRecipient(customer_id, name, address, city, dates) {
-    const res = await pool.query(
-      `INSERT INTO recipients (customer_id, full_name, address_line1, city) VALUES ($1, $2, $3, $4) RETURNING id`,
-      [customer_id, name, address, city]
-    )
-    return res.rows[0].id
-  }
+  async addRecipient(
+  customer_id,
+  first_name,
+  last_name,
+  address_line1,
+  city,
+  state,
+  zip_code,
+  occasion,
+  important_date,
+  notes
+) {
+  const res = await pool.query(
+    `INSERT INTO recipients (
+      customer_id, first_name, last_name, address_line1, city, state, zip_code,
+      occasion, important_date, notes
+    ) VALUES (
+      $1, $2, $3, $4, $5, $6, $7, $8, $9, $10
+    ) RETURNING id`,
+    [
+      customer_id,
+      first_name,
+      last_name,
+      address_line1,
+      city,
+      state,
+      zip_code,
+      occasion,
+      important_date,
+      notes
+    ]
+  )
+  return res.rows[0].id
+}
 }
