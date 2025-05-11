@@ -7,7 +7,9 @@ import { fileURLToPath } from 'url'
 
 dotenv.config()
 const app = express()
-app.use(cors())
+app.use(cors({
+  origin: 'https://shoppressie.com'  // <-- your actual domain
+}))
 app.use(express.json())
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 app.set('views', path.join(__dirname, 'views'))
