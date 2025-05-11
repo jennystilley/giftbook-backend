@@ -1,22 +1,20 @@
 <div>
-<!-- Greeting hidden for cleaner UI -->  <% if (recipients.length === 0) { %>
+  <% if (recipients.length === 0) { %>
     <p>You haven't added anyone yet.</p>
- <% } else { %>
-  <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
-    <% recipients.forEach(r => { %>
-      <div style="border: 1px solid #e1e1e1; border-radius: 8px; padding: 1rem; width: 100%; max-width: 300px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: relative;">
-        <h4 style="margin: 0 0 0.5rem 0;"><%= r.first_name %> <%= r.last_name %></h4>
-        <p style="margin: 0.25rem 0;"><strong>Occasion:</strong> <%= r.occasion || '—' %></p>
-        <p style="margin: 0.25rem 0;"><strong>Date:</strong> <%= r.important_date ? r.important_date.toDateString() : '—' %></p>
-        <p style="margin: 0.25rem 0; font-size: 0.9rem; color: #666;"><%= r.notes %></p>
-        <div style="margin-top: 0.5rem;">
-          <button style="font-size: 0.8rem; background: transparent; border: none; color: #0070f3; cursor: pointer;" onclick="editRecipient(<%= r.id %>)">Edit</button>
-          <button style="font-size: 0.8rem; background: transparent; border: none; color: #c00; cursor: pointer;" onclick="deleteRecipient(<%= r.id %>)">Delete</button>
+  <% } else { %>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
+      <% recipients.forEach(r => { %>
+        <div style="border: 1px solid #e1e1e1; border-radius: 8px; padding: 1rem; width: 100%; max-width: 300px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: relative;">
+          <h4 style="margin: 0 0 0.5rem 0;"><%= r.first_name %> <%= r.last_name %></h4>
+          <p style="margin: 0.25rem 0;"><strong>Occasion:</strong> <%= r.occasion || '—' %></p>
+          <p style="margin: 0.25rem 0;"><strong>Date:</strong> <%= r.important_date ? r.important_date.toDateString() : '—' %></p>
+          <p style="margin: 0.25rem 0; font-size: 0.9rem; color: #666;"><%= r.notes %></p>
+          <div style="margin-top: 0.5rem;">
+            <button style="font-size: 0.8rem; background: transparent; border: none; color: #0070f3; cursor: pointer;" onclick="editRecipient(<%= r.id %>)">Edit</button>
+            <button style="font-size: 0.8rem; background: transparent; border: none; color: #c00; cursor: pointer;" onclick="deleteRecipient(<%= r.id %>)">Delete</button>
+          </div>
         </div>
-      </div>
-    <% }) %>
-  </div>
-    <% }) %>
-  </div>
-<% } %>
+      <% }) %>
+    </div>
+  <% } %>
 </div>
