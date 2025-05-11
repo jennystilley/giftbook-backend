@@ -25,6 +25,7 @@ export default {
   },
   async addRecipient(
   customer_id,
+    const full_name = `${first_name} ${last_name}`
   first_name,
   last_name,
   address_line1,
