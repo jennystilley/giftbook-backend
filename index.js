@@ -35,6 +35,60 @@ app.get('/giftbook', async (req, res) => {
     res.status(500).send('Something went wrong.')
   }
 })
+app.post('/giftbook', async (req, res) => {
+  const {
+    email,
+    first_name,
+    last_name,
+    address_line1,
+    city,
+    state,
+    zip_code,
+    occasion,
+    important_date,
+    notes
+  } = req.body;
+
+  if (!email) {
+    return res.status(400).send('Missing customer email');
+  }
+
+  try {
+    const result = await db.query(
+      'SELECT id FROM customers WHERE email = $1',
+      [email]
+    );
+    let customerId;
+
+    if (result.rows.length > 0) {
+      customerId = result.rows[0].id;
+    } else {
+      const insert = await db.query(
+        'INSERT INTO customers (email) VALUES ($1) RETURNING id',
+        [email]
+      );
+      customerId = insert.rows[0].id;
+    }
+
+    await db.query(
+      `INSERT INTO recipients (
+        customer_id, first_name, last_name, address_line1, city, state, zip_code,
+        occasion, important_date, notes
+      ) VALUES (
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10
+      )`,
+      [
+        customerId, first_name, last_name, address_line1, city, state, zip_code,
+        occasion, important_date, notes
+      ]
+    );
+
+    res.status(201).send('Recipient saved');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error saving recipient');
+  }
+});
 
 // ✏️ Add new recipient (POST)
 app.post('/api/recipients', async (req, res) => {
