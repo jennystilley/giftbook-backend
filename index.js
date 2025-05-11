@@ -59,11 +59,17 @@ app.post('/giftbook', async (req, res) => {
     const user = await db.getOrCreateCustomer(email)
 
     await db.addRecipient(
-      user.id,
-      `${first_name} ${last_name}`,
-      address_line1,
-      city
-    ) // You can extend `addRecipient` to accept all fields if needed
+  user.id,
+  first_name,
+  last_name,
+  address_line1,
+  city,
+  state,
+  zip_code,
+  occasion,
+  important_date,
+  notes
+) // You can extend `addRecipient` to accept all fields if needed
 
     res.status(201).send('Recipient saved')
   } catch (err) {
