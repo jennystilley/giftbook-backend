@@ -10,8 +10,8 @@
         <p style="margin: 0.25rem 0;"><strong>Date:</strong> <%= r.important_date ? r.important_date.toDateString() : '—' %></p>
         <p style="margin: 0.25rem 0; font-size: 0.9rem; color: #666;"><%= r.notes %></p>
         <div style="margin-top: 0.5rem;">
-          <button style="font-size: 0.8rem; background: transparent; border: none; color: #0070f3; cursor: pointer;">Edit</button>
-          <button style="font-size: 0.8rem; background: transparent; border: none; color: #c00; cursor: pointer;">Delete</button>
+          <button style="font-size: 0.8rem; background: transparent; border: none; color: #0070f3; cursor: pointer;" onclick="editRecipient(<%= r.id %>)">Edit</button>
+          <button style="font-size: 0.8rem; background: transparent; border: none; color: #c00; cursor: pointer;" onclick="deleteRecipient(<%= r.id %>)">Delete</button>
         </div>
       </div>
     <% }) %>
