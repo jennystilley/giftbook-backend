@@ -25,7 +25,6 @@ export default {
   },
   async addRecipient(
   customer_id,
-    const full_name = `${first_name} ${last_name}`
   first_name,
   last_name,
   address_line1,
@@ -36,15 +35,17 @@ export default {
   important_date,
   notes
 ) {
+  const full_name = `${first_name} ${last_name}`;
   const res = await pool.query(
     `INSERT INTO recipients (
-      customer_id, first_name, last_name, address_line1, city, state, zip_code,
+      customer_id, full_name, first_name, last_name, address_line1, city, state, zip_code,
       occasion, important_date, notes
     ) VALUES (
-      $1, $2, $3, $4, $5, $6, $7, $8, $9, $10
+      $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11
     ) RETURNING id`,
     [
       customer_id,
+      full_name,
       first_name,
       last_name,
       address_line1,
