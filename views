@@ -1,0 +1,12 @@
+<div>
+  <p>Hello <%= user.email %>, here are your saved recipients:</p>
+  <% if (recipients.length === 0) { %>
+    <p>You haven't added anyone yet.</p>
+  <% } else { %>
+    <ul>
+      <% recipients.forEach(r => { %>
+        <li><%= r.full_name %> — <%= r.city %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+</div>
