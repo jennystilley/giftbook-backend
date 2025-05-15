@@ -29,8 +29,7 @@ app.get('/giftbook', async (req, res) => {
     const user = await db.getOrCreateCustomer(email)
     const recipients = await db.getRecipients(user.id)
 
-    res.render('giftbook', { user, recipients })
-  } catch (err) {
+res.json({ recipients })  } catch (err) {
     console.error('Error rendering giftbook:', err)
     res.status(500).send('Something went wrong.')
   }
